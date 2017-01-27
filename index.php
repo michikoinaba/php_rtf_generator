@@ -3,9 +3,9 @@
 //////sybase connection///////////////
 
 
-//connect to sybase wolf
+//connect to sybase database
 $server_conn = mssql_connect(
-		'database',
+		'host',
 		'username',
 		'password');
 
@@ -14,13 +14,13 @@ if (!$server_conn)
 	else
 	{
 		//connect to the database
-		$db_conn = mssql_select_db('table', $server_conn);
+		$db_conn = mssql_select_db('database', $server_conn);
 
 
 		if($db_conn){
 				
 		 // create SQL 
-		  $sql = "select * from cms32 WHERE bidno= '10003     '";
+		  $sql = "select * from table_name WHERE num= '10003     '";
 		  // excecute SQL statement
 		  $result = mssql_query($sql);
 		  	
@@ -82,13 +82,16 @@ fclose($handle);
 $merge=array();
 
 //REPLACE INFO
-$merge['CMSLeaseNo']=$data_array['bidno'];
-$merge['GoodThruDt']=$data_array['goodthrudt'];
-$merge['Municipality']=$data_array['bidno'];
+//'TESTNO, TESTdate, TestWord are the fieldnames in the rtf template.'
+//$data_array[] is the data from sybase 
+$merge['TESTNo']=$data_array['num'];
+$merge['TESTdate']=$data_array['date'];
+$merge['TestWord']=$data_array['num'];
 
+//get the rtf file contents
 $haystack=textreplace($merge,$contents);
 
-
+//generate a rtf file here.
 //header("Content-Type: application/vnd.ms-excel");
 //header('Content-Disposition: attachment; filename="MyMsDocFile.doc');
 Header('Content-Type: application/rtf');
