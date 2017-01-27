@@ -54,7 +54,7 @@ if (!$server_conn)
 ///////////////////////////////////////////
 
 /////Generate word doc ///////////////////////
-$filename = "/var/www/html/cms/awardf_test.rtf";
+$filename = "/var/www/html/cms_git/test_template.rtf";
 
 
 function textreplace($needle,$haystack){
